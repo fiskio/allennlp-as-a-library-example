@@ -44,3 +44,7 @@ To see what modules are available check: `[https://allenai.github.io/allennlp-do
 5. Can you add a character embedding module in conjunction to the word one?
 
 	*Hint:* you need a `token_indexer` and a `text_field_embedder`
+
+### Coding
+
+Check out the `coding` branch and fill the blanks in `DatasetReader` and `Model`.
