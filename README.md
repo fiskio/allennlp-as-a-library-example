@@ -22,9 +22,9 @@ To speed iteration, training and validation files are heavily reduced. You can s
 
 ### Docs
 
-To see a demo of some standard models: `[http://demo.allennlp.org/](http://demo.allennlp.org/)`
+To see a demo of some standard models: [http://demo.allennlp.org/](http://demo.allennlp.org/)
 
-To see what modules are available check: `[https://allenai.github.io/allennlp-docs/](https://allenai.github.io/allennlp-docs/)`
+To see what modules are available check: [https://allenai.github.io/allennlp-docs/](https://allenai.github.io/allennlp-docs/)
 
 
 ### Tasks
