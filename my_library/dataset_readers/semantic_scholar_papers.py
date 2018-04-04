@@ -74,17 +74,17 @@ class SemanticScholarDatasetReader(DatasetReader):
         # pylint: disable=arguments-differ
         tokenized_title = self._tokenizer.tokenize(title)
         tokenized_abstract = self._tokenizer.tokenize(abstract)
-        title_field = TextField(tokenized_title, self._token_indexers)
-        abstract_field = TextField(tokenized_abstract, self._token_indexers)
+        title_field = #TODO(tokenized_title, self._token_indexers)
+        abstract_field = #TODO(tokenized_abstract, self._token_indexers)
         fields = {'title': title_field, 'abstract': abstract_field}
         if venue is not None:
-            fields['label'] = LabelField(venue)
-        return Instance(fields)
+            fields['label'] = #TODO(venue)
+        return #TODO(fields)
 
     @classmethod
     def from_params(cls, params: Params) -> 'SemanticScholarDatasetReader':
         lazy = params.pop('lazy', False)
-        tokenizer = Tokenizer.from_params(params.pop('tokenizer', {}))
-        token_indexers = TokenIndexer.dict_from_params(params.pop('token_indexers', {}))
+        tokenizer = #TODO.from_params(params.pop('tokenizer', {}))
+        token_indexers = #TODO.dict_from_params(params.pop('token_indexers', {}))
         params.assert_empty(cls.__name__)
         return cls(lazy=lazy, tokenizer=tokenizer, token_indexers=token_indexers)

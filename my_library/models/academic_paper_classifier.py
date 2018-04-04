@@ -101,17 +101,17 @@ class AcademicPaperClassifier(Model):
             A scalar loss to be optimised.
         """
         embedded_title = self.text_field_embedder(title)
-        title_mask = util.get_text_field_mask(title)
+        title_mask = #TODO
         encoded_title = self.title_encoder(embedded_title, title_mask)
 
-        embedded_abstract = self.text_field_embedder(abstract)
+        embedded_abstract = #TODO
         abstract_mask = util.get_text_field_mask(abstract)
         encoded_abstract = self.abstract_encoder(embedded_abstract, abstract_mask)
 
-        logits = self.classifier_feedforward(torch.cat([encoded_title, encoded_abstract], dim=-1))
+        logits = self.classifier_feedforward(#TODO)
         output_dict = {'logits': logits}
         if label is not None:
-            loss = self.loss(logits, label.squeeze(-1))
+            loss = self.loss(#TODO)
             for metric in self.metrics.values():
                 metric(logits, label.squeeze(-1))
             output_dict["loss"] = loss
@@ -128,7 +128,7 @@ class AcademicPaperClassifier(Model):
         output_dict['class_probabilities'] = class_probabilities
 
         predictions = class_probabilities.cpu().data.numpy()
-        argmax_indices = numpy.argmax(predictions, axis=-1)
+        argmax_indices = numpy.#TODO
         labels = [self.vocab.get_token_from_index(x, namespace="labels")
                   for x in argmax_indices]
         output_dict['label'] = labels
@@ -141,13 +141,13 @@ class AcademicPaperClassifier(Model):
     @classmethod
     def from_params(cls, vocab: Vocabulary, params: Params) -> 'AcademicPaperClassifier':
         embedder_params = params.pop("text_field_embedder")
-        text_field_embedder = TextFieldEmbedder.from_params(vocab, embedder_params)
-        title_encoder = Seq2VecEncoder.from_params(params.pop("title_encoder"))
-        abstract_encoder = Seq2VecEncoder.from_params(params.pop("abstract_encoder"))
-        classifier_feedforward = FeedForward.from_params(params.pop("classifier_feedforward"))
+        text_field_embedder = #TODO.from_params(vocab, embedder_params)
+        title_encoder = #TODO.from_params(params.pop("title_encoder"))
+        abstract_encoder = #TODO.from_params(params.pop("abstract_encoder"))
+        classifier_feedforward = #TODO.from_params(params.pop("classifier_feedforward"))
 
-        initializer = InitializerApplicator.from_params(params.pop('initializer', []))
-        regularizer = RegularizerApplicator.from_params(params.pop('regularizer', []))
+        initializer = #TODO.from_params(params.pop('initializer', []))
+        regularizer = #TODO.from_params(params.pop('regularizer', []))
 
         return cls(vocab=vocab,
                    text_field_embedder=text_field_embedder,
