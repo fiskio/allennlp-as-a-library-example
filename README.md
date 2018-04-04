@@ -10,12 +10,37 @@ to classify the papers given some label (which we specified as the paper's venue
 `DatasetReader`).  Finally, we added a script to use AllenNLP's training commands from a
 third-party repository, and an experiment configuration for running a real model on real data.
 
-To train this model, after setting up your development environment by installing `allennlp==0.4`,
-`pytorch==0.3.1`, and `spacy>=2.0`, you run:
+To get the Glove embeddings and the training data once and for all run: `./get_data.sh`
+
+To run within docker prepend `./run.sh`
 
 ```bash
-python -m allennlp.run train experiments/venue_classifier.json -s /tmp/your_output_dir_here --include-package my_library
+python -m allennlp.run train experiments/venue_classifier.json -s experiment_output_dir --include-package my_library
 ```
 
-This example was written by the AllenNLP team.  You can see a similar example repository written
-by others [here](https://github.com/recognai/get_started_with_deep_learning_for_text_with_allennlp).
+To speed iteration, training and validation files are heavily reduced. You can switch to the full version modifying the `experiments/venue_classifier.json`
+
+### Docs
+
+To see a demo of some standard models: `http://demo.allennlp.org/`
+
+To see what modules are available check: `https://allenai.github.io/allennlp-docs/`
+
+
+### Tasks
+
+1. Run it once, observe the logs
+
+2. What is saved in the output directory?
+
+3. Can you make the encoders bidirectional?
+
+	*Hint:* check your sizes
+
+4. Can you add a learning rate scheduler? (as in [SGDR: Stochastic Gradient Descent with Warm Restarts](https://arxiv.org/abs/1608.03983))
+
+	*Hint:* this comes from PyTorch directy
+
+5. Can you add a character embedding module in conjunction to the word one?
+
+	*Hint:* you need a `token_indexer` and a `text_field_embedder`

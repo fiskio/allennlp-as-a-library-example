@@ -1,32 +1,38 @@
 {
   "dataset_reader": {
-    "type": "s2_papers"
+    "type": "s2_papers",
+    "token_indexers": {
+      "tokens": {
+        "type": "single_id",
+        "lowercase_tokens": false
+      }
+    }
   },
-  "train_data_path": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/academic-papers-example/train.jsonl",
-  "validation_data_path": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/academic-papers-example/dev.jsonl",
+  "train_data_path": "data/train.jsonl",
+  "validation_data_path": "data/dev.jsonl",
+  // "validation_data_path": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/academic-papers-example/dev.jsonl",
   "model": {
     "type": "paper_classifier",
     "text_field_embedder": {
       "tokens": {
         "type": "embedding",
-        "pretrained_file": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/glove/glove.6B.100d.txt.gz",
+        "pretrained_file": "glove/glove.6B.100d.txt.gz",
+        // "pretrained_file": "https://s3-us-west-2.amazonaws.com/allennlp/datasets/glove/glove.6B.100d.txt.gz",
         "embedding_dim": 100,
         "trainable": false
       }
     },
     "title_encoder": {
       "type": "lstm",
-      "bidirectional": true,
       "input_size": 100,
-      "hidden_size": 100,
+      "hidden_size": 200,
       "num_layers": 1,
       "dropout": 0.2
     },
     "abstract_encoder": {
       "type": "lstm",
-      "bidirectional": true,
       "input_size": 100,
-      "hidden_size": 100,
+      "hidden_size": 200,
       "num_layers": 1,
       "dropout": 0.2
     },
@@ -41,16 +47,16 @@
   "iterator": {
     "type": "bucket",
     "sorting_keys": [["abstract", "num_tokens"], ["title", "num_tokens"]],
-    "batch_size": 64
+    "batch_size": 16
   },
   "trainer": {
-    "num_epochs": 40,
+    "num_epochs": 10,
     "patience": 10,
     "cuda_device": 0,
     "grad_clipping": 5.0,
     "validation_metric": "+accuracy",
     "optimizer": {
-      "type": "adagrad"
+      "type": "adam"
     }
   }
 }
